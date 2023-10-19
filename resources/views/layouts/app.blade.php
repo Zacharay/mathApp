@@ -3,6 +3,7 @@
 <head>   
     <meta charset="UTF-8"/>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/555617a6c2.js" crossorigin="anonymous"></script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js">
     </script>
     {{-- blade-formatter-disable --}}

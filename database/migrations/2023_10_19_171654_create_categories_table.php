@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sheets', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('year');
-            $table->text('month');
-            $table->text('type');
-            $table->boolean('isExtended');
-            $table->boolean('isNewFormula');
-            $table->unsignedTinyInteger('taskCount');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sheets');
+        Schema::dropIfExists('categories');
     }
 };

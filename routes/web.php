@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SheetController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/',function(){
-    return redirect()->route('task.create');
+    return redirect()->route('sheet.index');
 });
-Route::get('/task/create', function () {
-    return view('task.create');
-})->name('task.create');
-Route::get('/sheet/create', function () {
-    return view('sheet.create');
-});
+Route::resource('task',TaskController::class)->except(['create']);;
+Route::resource('sheet',SheetController::class);
+Route::get('sheet/{sheet_id}/task/create/{task_nr}', [TaskController::class, 'create'])
+    ->name('task.create');
