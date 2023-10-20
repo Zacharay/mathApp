@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SheetRequest;
 use App\Models\Sheet;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class SheetController extends Controller
@@ -44,10 +45,11 @@ class SheetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $sheet_id)
     {
-        $sheet = Sheet::find($id);
-        return view('sheet.show',['sheet'=>$sheet]);
+        $sheet = Sheet::find($sheet_id);
+        $tasks = Task::where('sheet_id',$sheet_id)->orderBy('task_nr','asc')->get();
+        return view('sheet.show',['sheet'=>$sheet,'tasks'=>$tasks]);
     }
 
     /**

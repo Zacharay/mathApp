@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Sheet;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -21,8 +23,9 @@ class TaskController extends Controller
     public function create($sheetID,$taskNr)
     {
         $sheet = Sheet::find($sheetID);
+        $categories = Category::all();
         
-        return view('task.create',['sheet'=>$sheet,'taskNr'=>$taskNr]);
+        return view('task.create',['sheet'=>$sheet,'taskNr'=>$taskNr,'categories'=>$categories]);
     }
 
     /**
@@ -30,7 +33,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newTask = new Task();
+        $newTask->sheet_id = $request->sheet_id;
+        $newTask->category_id = $request->category_id;
+        $newTask->task_nr = $request->task_nr;
+        $newTask->description = $request->description;
+        $newTask->save();
+        $sheet = Sheet::find($request->sheet_id);
+        return redirect()->route('sheet.show',['sheet'=>$sheet]);
     }
 
     /**

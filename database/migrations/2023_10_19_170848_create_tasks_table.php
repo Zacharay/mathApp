@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sheet_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedInteger('task_nr');
             $table->text('description');
-
+            
             $table->timestamps();
             $table->foreign('sheet_id')->references('id')->on('sheets')->onDelete('CASCADE');
-            $table->foreign('category_id')->references('id')->on('sheets')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
         });
     }
 
