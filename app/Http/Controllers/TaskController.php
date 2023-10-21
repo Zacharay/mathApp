@@ -48,7 +48,9 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $sheet = Sheet::find($task->sheet_id);
+        return view('task.show',['task'=>$task,'sheet'=>$sheet]);
     }
 
     /**
@@ -56,15 +58,19 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $sheet = Sheet::find($task->sheet_id);
+        $categories = Category::all();
+        return view('task.edit',['task'=>$task,'sheet'=>$sheet,'categories'=>$categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $task->update($request->all());
+        return redirect()->route('task.show',['task'=>$task->id]);
     }
 
     /**

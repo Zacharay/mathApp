@@ -9,6 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['description','category_id'];
     public function sheet()
     {
         return $this->belongsTo(Sheet::class);
